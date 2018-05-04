@@ -1,1 +1,0 @@
-# cwdgifting.github.io
