@@ -48,7 +48,7 @@ componentWillReceiveProps(nextProps) {
         console.log("nextprop applied", nextProps.applied);
         swal("Job Applied successfully!", " ", "success");
     }
-    
+
 }
 coverLetterChangeHandler = (e) => {
     this.setState({
@@ -133,7 +133,7 @@ submitApplication = (e) => {
         jobtitle : this.props.customJobPost.JobTitle,
         joblocation :this.props.customJobPost.JobLocation,
         companyLogo : this.props.customJobPost.CompanyLogo,
-        id : this.props.customJobPost.Job_id,
+        id : this.props.customJobPost._id,
         easyApply : this.props.customJobPost.easyApply,
         appliedDate : new Date()
     }
@@ -146,17 +146,17 @@ submitApplication = (e) => {
     axios.post(`${BASE_URL}/uploadresume`, formData)
                      .then((response) => {
                          if(response.status == 200){
-                          
+
                            console.log("Status: " + response.status );
                          }
-                
+
     });
     this.props.customApplyJob(values)
     }else {
         alert("Resume should be in pdf format")
     }
 }
-    render() { 
+    render() {
         return (
             <div>
             <Navbar />
@@ -165,16 +165,16 @@ submitApplication = (e) => {
                 {/* <img className="image1" src="https://media.licdn.com/dms/image/C4E0BAQGHz8JwrMTQ0A/company-logo_200_200/0?e=1550102400&v=beta&t=rYxO6tzuIqWcPYuH6AzMQPsbxiTptwndzJb_q6XTzqo"/> */}
                 <img className="image1" src={this.props.customJobPost.CompanyLogo}/>
             </div>
-            <div> 
+            <div>
             <h2 className="cent">{this.props.customJobPost.JobTitle} {this.props.customJobPost.jobFunction}</h2>
             <h3 className="cent1">{this.props.customJobPost.CompanyName}</h3><br/>
             <p className="cent2">{this.props.customJobPost.JobLocation}</p></div>
-           
+
             </div>
             <div className="login-form">
                     <h3 className="head">Personal Information</h3>
                     <form enctype="multipart/form-data" onSubmit={this.submitApplication.bind(this)}>
-                    
+
                     <div class="form-group1">
                         <label className="field-label" for="fname">FirstName*</label>
                         <input onChange = {this.fnameChangeHandler} type="text" class="form-control1" name="firstname" id="fname" required/>
@@ -211,13 +211,13 @@ submitApplication = (e) => {
                             <option value="company website">company website</option>
                             <option value="Career Fairs">Career Fairs</option>
                             <option value="Google">Google</option>
-                        </select>          
-                       
+                        </select>
+
                     </div>
                     <hr/>
                     <h3 className="head">U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION</h3>(Completion is voluntary and will not subject you to adverse treatment)
                     <br/><br/>
-                    <p>Our company values diversity. To ensure that we comply with reporting requirements and to learn more about how we can increase diversity in our candidate pool, we invite you to voluntarily provide demographic 
+                    <p>Our company values diversity. To ensure that we comply with reporting requirements and to learn more about how we can increase diversity in our candidate pool, we invite you to voluntarily provide demographic
                     information in a confidential survey at the end of this application.</p>
 
                     <div class="form-group1">
@@ -227,8 +227,8 @@ submitApplication = (e) => {
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Decline to self-identity">Decline to self-identity</option>
-                        </select>          
-                      
+                        </select>
+
                     </div>
                     <div class="form-group1">
                         <label className="field-label">Race</label>
@@ -242,8 +242,8 @@ submitApplication = (e) => {
                             <option value="American Indian or Alaska Native (Not Hispanic or Latino)">American Indian or Alaska Native (Not Hispanic or Latino)</option>
                             <option value="Two or More Races (Not Hispanic or Latino)">Two or More Races (Not Hispanic or Latino)</option>
                             <option value=">Decline to self-identity">Decline to self-identity</option>
-                        </select>          
-            
+                        </select>
+
                     </div>
                     <div class="form-group1">
                         <label className="field-label">Veteran Status</label>
@@ -252,8 +252,8 @@ submitApplication = (e) => {
                             <option value="I am a veteran">I am a veteran</option>
                             <option value="I am not a veteran">I am not a veteran</option>
                             <option value="Decline to self-identify">Decline to self-identity</option>
-                        </select>          
-                    
+                        </select>
+
                     </div>
 
                     <div class="form-group1">
@@ -263,14 +263,14 @@ submitApplication = (e) => {
                             <option value="Yes, I have a disability (or previously had a disability)">Yes, I have a disability (or previously had a disability)</option>
                             <option value="No, I don't have a disability">No, I don't have a disability</option>
                             <option value="I don't wish to answer">I don't wish to answer</option>
-                        </select>          
-                     
+                        </select>
+
                     </div>
-                   
+
                     <button className="btn btn-primary1" type="submit">Submit Application</button>
                     </form>
-                    
-                    
+
+
             </div>
          </div>
           );
@@ -288,7 +288,7 @@ const mapStateToProps = state => {
         customJobPost : state.LoginReducer.customJobPost
      };
   };
-  
+
 function mapDispatchToProps(dispatch) {
       return bindActionCreators({ customApplyJob }, dispatch);
 }
@@ -296,4 +296,3 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(customApply);
-
