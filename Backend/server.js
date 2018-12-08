@@ -5,18 +5,19 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({ origin: 'https://test-app-12346.herokuapp.com', credentials: true }));
+// app.use(cors({ origin: 'https://test-app-12346.herokuapp.com', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 var multer = require("multer");
 const fetch = require("node-fetch");
 const request = require("request");
 app.use(bodyParser.json());
 let fs = require("fs");
 var axios = require("axios")
-
 var jwt = require("jsonwebtoken");
 
 app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://test-app-12346.herokuapp.com');
+    // res.setHeader('Access-Control-Allow-Origin', 'https://test-app-12346.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
@@ -78,7 +79,7 @@ app.post('/addadrink',function(req,res){
         }
       else
         {
-          res.send(200)
+          res.status(200).send("Success")
           res.end("Success")
         }
       })
@@ -87,6 +88,7 @@ app.post('/addadrink',function(req,res){
 
 
 app.post("/processOrders/:orderid",(req,res)=>{
+
   const orderid = req.params.orderid;
 
   const data = {
@@ -94,9 +96,7 @@ app.post("/processOrders/:orderid",(req,res)=>{
     userAmount: req.body.price
   }
   axios.post("http://54.241.71.96:3001/orders",data).then((response)=>{
-
     res.sendStatus(200)
-
   }).catch((error)=>{
       res.status(201).json({
         erorr : "We could not process orders"
@@ -142,7 +142,7 @@ app.post('/signup',function(req,res){
 
 const url_login_admin = "http://54.177.74.65:3000/login";
 app.post('/admin/login',function(req,res){
-  console.log("REQ BOIDY", req.body)
+  console.log("REQ BODY", req.body)
   fetch(url_login_admin, {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -161,6 +161,7 @@ app.post('/admin/login',function(req,res){
   else
     {
       const body = { _id: req.body.username, type: "admin" };
+      console.log("tooken")
       const token = jwt.sign(
         { user: body },
         "CCSUSER"
@@ -429,5 +430,3 @@ app.delete('/deletecart',function(req,res){
 app.listen(4004, () => {
     console.log("Listening on port 4004")
 })
-
-
