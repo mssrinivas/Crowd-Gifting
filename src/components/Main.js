@@ -4,7 +4,6 @@ import DrinksCatalog from './DrinksCatalog/DrinksCatalog';
 import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 import AddDrink from './AddDrink/AddDrink';
-import DrinkDescription from './DrinkDescription/DrinkDescription';
 import CartCatalog from './Cart/CartCatalog';
 import AdminLogin from './AdminLogin/AdminLogin';
 import Payments from "../components/Payments/Payments";
