@@ -50,7 +50,6 @@ console.log("STATE IS  " + this.state.user.name);
         <Route exact path="/admin/login" render={()=>(<AdminLogin value={this.state.user.name} />)} />   
         <Route exact path="/signup" render={()=>(<SignUp loadUser={this.loadUser} />)} />  
         <Route exact path="/addadrink" render={()=>(<AddDrink value={this.state.user.name} />)} /> 
-        <Route path="/drinks" render={()=>(<DrinkDescription value={this.state.user.name} />)} />
         <Route path="/mycart" render={()=>(<CartCatalog value={this.state.user.name} />)} />  
         <Route exact path="/payment" render={()=>(<Payments value={this.state.user.name} />)} /> 
        </div>
